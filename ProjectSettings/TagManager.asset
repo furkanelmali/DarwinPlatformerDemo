@@ -8,13 +8,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - Player
   - Water
   - UI
+  - Ground
   - Climbing
-  - Player
+  - Bouncing
   - Background
-  - 
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
     locked: 0
   - name: Climbing
     uniqueID: 4196506785
+    locked: 0
+  - name: Enemy
+    uniqueID: 1558075149
     locked: 0
   - name: Character
     uniqueID: 786264439

@@ -6,19 +6,21 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     Vector2 moveInput;
-    public float runSpeed = 10f;
-    public float jumpSpeed = 5f;
-    public float climbSpeed = 5f;
+    [SerializeField] float runSpeed = 10f;
+    [SerializeField] float jumpSpeed = 5f;
+    [SerializeField] float climbSpeed = 5f;
     Rigidbody2D rb;
     Animator myAnim;
   
-    CapsuleCollider2D myCollider;
+    BoxCollider2D myFeetCollider;
+    CapsuleCollider2D myBodyCollider;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
-        myCollider = GetComponent<CapsuleCollider2D>();
+        myBodyCollider = GetComponent<CapsuleCollider2D>();
+        myFeetCollider = GetComponent<BoxCollider2D>();
        
     }
 
@@ -41,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if(!myCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if(!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             return;            
         }
@@ -91,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Climbing()
     {
-        if(!myCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+        if(!myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
         {
             rb.gravityScale = 8;
             myAnim.SetBool("isClimbing",false);
